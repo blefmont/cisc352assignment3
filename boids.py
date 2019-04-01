@@ -32,11 +32,47 @@ class Graphics():
                                           b.position[1] + 3 + self.offset[1]))        
             
 def move_all_boids_to_new_positions(boids):
-    pass
-def rule1():
-    pass
-def rule2():
-    pass
+    v1 = []
+    v2 = []
+    v3 = []
+    for b in boids:
+        velX = 0
+        velY = 0
+        posX = 0
+        posY = 0
+        v1 = rule1(b, boids)
+        v2 = rule2(b, boids)
+        v3 = rule3(b, boids)
+        velX = b.velocity[0] + v1[0] + v2[0] + v3[0]
+        velY = b.velocity[1] + v1[1] + v2[1] + v3[1]
+        b.velocity = (velX, velY)
+        posX = b.position[0] + b.velocity[0]
+        posY = b.position[1] + b.velocity[1]
+        b.position = (posX, posY)
+        
+def rule1(b1, boids):
+    r1 = [0,0]
+    for b in boids:
+        if b != b1:
+            r1[0] = r1[0] + b.position[0]
+            r1[1] = r1[1] + b.position[1]
+    r1[0] = r1[0] / len(boids)
+    r1[1] = r1[1] / len(boids)
+    r1[0] = r1[0] - b1.position[0]
+    r1[1] = r1[1] - b1.position[1]
+    return (r1 / 100)
+
+def rule2(b2, boids):
+    r2 = [0,0]
+    for b in boids:
+        if b != b2:
+            distance = 0
+            distance = abs(b.position[0] - b2.position[0]) + abs(b.position[1] - b2.position[1])
+            if distance < 100:
+                r2[0] = r2[0] - (b.position[0] - b2.position[0])
+                r2[1] = r2[1] - (b.position[1] - b2.position[1])
+    return r2
+
 def rule3():
     pass
 def rule4():
