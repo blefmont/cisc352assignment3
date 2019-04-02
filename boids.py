@@ -60,7 +60,9 @@ def rule1(b1, boids):
     r1[1] = r1[1] / len(boids)
     r1[0] = r1[0] - b1.position[0]
     r1[1] = r1[1] - b1.position[1]
-    return (r1 / 100)
+    r1[0] = r1[0] / 100
+    r1[1] = r1[1] / 100
+    return r1
 
 def rule2(b2, boids):
     r2 = [0,0]
