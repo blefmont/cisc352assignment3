@@ -78,7 +78,7 @@ def rule2(b2, boids):
 def rule3(b3,boids):
     r3 = [0,0]
     for b in boids:
-        if b != b2:
+        if b != b3:
             r3[0] = r3[0] + b.velocity[0]
             r3[1] = r3[1] + b.velocity[1]
     r3[0] = r3[0] / len(boids)
