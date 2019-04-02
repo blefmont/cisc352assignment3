@@ -1,5 +1,6 @@
 ### Boids rules
 from tkinter import *
+import time
 
 class boid():
     #creates boid at target location, with velocity (0,1)
@@ -43,11 +44,17 @@ def move_all_boids_to_new_positions(boids):
         v1 = rule1(b, boids)
         v2 = rule2(b, boids)
         v3 = rule3(b, boids)
+        v4 = rule4(b, boids)
         velX = b.velocity[0] + v1[0] + v2[0] + v3[0]
         velY = b.velocity[1] + v1[1] + v2[1] + v3[1]
         b.velocity = (velX, velY)
         posX = b.position[0] + b.velocity[0]
         posY = b.position[1] + b.velocity[1]
+        b.position = (posX, posY)
+        #after 10 second the wind rule start
+        time.sleep(10)
+        posX = posX + v4[0]
+        posY = posY + v4[1]
         b.position = (posX, posY)
         
 def rule1(b1, boids):
@@ -78,20 +85,21 @@ def rule2(b2, boids):
 def rule3(b3,boids):
     r3 = [0,0]
     for b in boids:
-        if b != b3:
+        if b != b3:q
             r3[0] = r3[0] + b.velocity[0]
             r3[1] = r3[1] + b.velocity[1]
     r3[0] = r3[0] / len(boids)
     r3[1] = r3[1] / len(boids)
-    r3[0] = r3[0] - b1.velocity[0]
-    r3[1] = r3[1] - b1.velocity[1]
+    r3[0] = r3[0] - b3.velocity[0]
+    r3[1] = r3[1] - b3.velocity[1]
     r3[0] = r3[0] / 8
     r3[1] = r3[1] / 8
     return r3
             
         
-def rule4():
-    pass
+def rule4(b4,boids):
+    wind = [1,0]
+    return wind
 
 
 def main():
