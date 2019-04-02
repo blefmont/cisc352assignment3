@@ -75,8 +75,21 @@ def rule2(b2, boids):
                 r2[1] = r2[1] - (b.position[1] - b2.position[1])
     return r2
 
-def rule3():
-    pass
+def rule3(b3,boids):
+    r3 = [0,0]
+    for b in boids:
+        if b != b2:
+            r3[0] = r3[0] + b.velocity[0]
+            r3[1] = r3[1] + b.velocity[1]
+    r3[0] = r3[0] / len(boids)
+    r3[1] = r3[1] / len(boids)
+    r3[0] = r3[0] - b1.velocity[0]
+    r3[1] = r3[1] - b1.velocity[1]
+    r3[0] = r3[0] / 8
+    r3[1] = r3[1] / 8
+    return r3
+            
+        
 def rule4():
     pass
 
